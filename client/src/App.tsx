@@ -4,7 +4,7 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import Navbar from "./components/Navbar";
 
-export const BASE_URL = "http://localhost:8000";
+export const BASE_URL = "https://go-to-do-6smk.onrender.com";
 
 const queryClient = new QueryClient();
 

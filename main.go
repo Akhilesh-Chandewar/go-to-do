@@ -27,11 +27,13 @@ type Todo struct {
 var todoCollection *mongo.Collection
 
 func main() {
-	// Load environment variables
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file:", err)
+	// Load environment variables	
+	if os.Getenv("ENVIRONMENT") == "development" {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal("Error loading .env file:", err)
+		}
 	}
-
+	
 	// Connect to MongoDB
 	mongoURI := os.Getenv("MONGO_URI")
 	clientOptions := options.Client().ApplyURI(mongoURI)
@@ -52,15 +54,10 @@ func main() {
 	// Fiber app
 	app := fiber.New()
 
-	// Middleware
-	app.Use(cors.New(cors.Config{
-		AllowOrigins: "*",
-	}))
-
 	// Routes
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{"message": "Todo API is running!"})
-	})
+	// app.Get("/", func(c *fiber.Ctx) error {
+	// 	return c.JSON(fiber.Map{"message": "Todo API is running!"})
+	// })
 	app.Get("/api/todos", getTodos)
 	app.Post("/api/todos", createTodo)
 	app.Put("/api/todos/:id", updateTodo)
@@ -70,6 +67,17 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8000"
+	}
+
+	if os.Getenv("ENVIRONMENT") == "development" {
+		// Middleware
+		app.Use(cors.New(cors.Config{
+			AllowOrigins: "*",
+		}))
+	}
+
+	if os.Getenv("ENVIRONMENT") == "production" {
+		app.Static("/", "./client/dist")
 	}
 	fmt.Println("🚀 Listening on port " + port)
 	log.Fatal(app.Listen("0.0.0.0:" + port))

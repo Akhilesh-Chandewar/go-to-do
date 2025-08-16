@@ -27,13 +27,12 @@ type Todo struct {
 var todoCollection *mongo.Collection
 
 func main() {
-	// Load environment variables	
-	if os.Getenv("ENVIRONMENT") == "development" {
-		if err := godotenv.Load(); err != nil {
-			log.Fatal("Error loading .env file:", err)
-		}
+	// Load environment variables
+
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file:", err)
 	}
-	
+
 	// Connect to MongoDB
 	mongoURI := os.Getenv("MONGO_URI")
 	clientOptions := options.Client().ApplyURI(mongoURI)

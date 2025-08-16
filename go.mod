@@ -5,11 +5,6 @@ go 1.24.4
 require github.com/gofiber/fiber/v2 v2.52.9
 
 require (
-	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
-)
-
-require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -32,5 +27,4 @@ require (
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.17.0 // indirect
-	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )

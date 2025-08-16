@@ -29,8 +29,10 @@ var todoCollection *mongo.Collection
 func main() {
 	// Load environment variables
 
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file:", err)
+	if os.Getenv("ENVIRONMENT") == "development" {
+		if err := godotenv.Load(); err != nil {
+			log.Println("⚠️  No .env file found (development only)")
+		}
 	}
 
 	// Connect to MongoDB

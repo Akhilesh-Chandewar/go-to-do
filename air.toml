@@ -3,7 +3,7 @@ tmp_dir = "tmp"  # Temp files location
 
 [build]
   bin = "tmp/main"  # Output binary location
-  cmd = "go build -o {{.Output}} ./..."  # Build command
+  cmd = "clear && go build -o {{.Output}} ./..."  # Build command with clear
   include_ext = ["go"]  # Watch only Go files
   exclude_dir = [
     "tmp",             # Air temp dir

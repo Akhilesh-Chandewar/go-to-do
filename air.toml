@@ -1,0 +1,18 @@
+root = "."  # Project root
+tmp_dir = "tmp"  # Temp files location
+
+[build]
+  bin = "tmp/main"  # Output binary location
+  cmd = "go build -o {{.Output}} ./..."  # Build command
+  include_ext = ["go"]  # Watch only Go files
+  exclude_dir = [
+    "tmp",             # Air temp dir
+    "client/node_modules", # React dependencies
+    "client/build",    # React build output
+    "client/dist"      # Optional: Vite/other build output
+  ]
+  exclude_file = ["*_test.go"]  # Ignore test files
+  delay = 1000  # Delay (ms) after last change before rebuild
+
+[log]
+  time = true  # Show timestamps in logs
